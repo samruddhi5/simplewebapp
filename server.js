@@ -1,5 +1,4 @@
- // inbuilt package to build simple http web site
-//use some libarry to create a server
+//Author :Ravi Tambade
 //Write some lines of code to generate html output
  var express=require('express');   // import library
  var app=express();                // create global object
