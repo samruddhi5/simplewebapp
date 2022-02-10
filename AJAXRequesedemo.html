@@ -1,0 +1,104 @@
+<html>
+<script>
+    function displayTable(arr) {
+        let str = "<table border='2' class='myc'><tr><th>User Id</th><th>Id</th>";
+        str += "<th>Title</th><th>Details</th></tr>";
+        for (var e of arr) {
+            //"<tr><td>Revati</td><td>Baner</td><td>4444444</td></tr>"
+            str += "<tr><td>" + e.userId + "</td><td>" + e.id + "</td><td>" + e.title + "</td><td>" + e.body + "</td></tr>";
+        }
+        str += "</table>"
+            //alert(str);
+        document.getElementById("mydiv").innerHTML = str;
+
+    }
+
+    function displayUserDetails(user1) {
+        str = `user Id : ${user1.userId} <br> Id: ${user1.id} <br>title :  ${user1.title}<br> body :${user1.body} <br>`;
+        document.getElementById("userdetails").innerHTML = str;
+    }
+
+    function getuserdetailsData() { // send ajax request to get single user details
+        var xhr;
+
+        //step 1: create XMLHttpRequest object
+        //contains multiple properties readyState onreadystatechange responseText responseXML
+        if (window.XMLHttpRequest) { // Mozill,Safari,IE 7+ 
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+
+        //step 2: create a request
+        var num = document.getElementById("nm").value;
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/" + num, true);
+        xhr.onreadystatechange = function() {
+                //alert("ready state value :"+xhr.readyState())
+                if (xhr.readyState == 4 && xhr.status == 200) { //data in json or xml is received
+                    //alert(xhr.responseText);
+                    var user1 = JSON.parse(xhr.responseText);
+                    console.log(user1);
+                    displayUserDetails(user1)
+
+                }
+
+            }
+            ///step 4: send the request
+        xhr.send()
+
+    }
+
+    function getData() {
+        var xhr;
+
+        //step 1: create XMLHttpRequest object
+        //contains multiple properties readyState onreadystatechange responseText responseXML
+        if (window.XMLHttpRequest) { // Mozill,Safari,IE 7+ 
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        //step 2: create a request
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+        xhr.onreadystatechange = function() {
+                //alert("ready state value :"+xhr.readyState())
+                if (xhr.readyState == 4 && xhr.status == 200) { //data in json or xml is received
+                    //alert(xhr.responseText);
+                    var userdata = JSON.parse(xhr.responseText);
+                    console.log(userdata);
+                    displayTable(userdata)
+                }
+
+            }
+            ///step 4: send the request
+        xhr.send()
+
+    }
+</script>
+
+<body>
+    <pre>
+This is httprequest will dirctly go to server
+After you click on the link this entire page will be changed to new response
+It will not update portion of the page
+It is time consuming
+and dosnot give good user experience
+</pre>
+
+    <!--this is HTTP request  using form action attribute and anchor tag href attribute-->
+    <form method="get">
+        Name <input type="text" name="nm" id="nm">
+        <button type="button" name="btn" onclick="getuserdetailsData()">send request to get single user details</button>
+        <button type="button" name="btn" onclick="getData()">send request to get All details</button>
+    </form>
+    <div id="userdetails">
+
+    </div>
+    <div id="mydiv">
+
+    </div>
+</body>
+
+</html>
