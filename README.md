@@ -11,5 +11,4 @@ Opensource project maintained by Ravi Tambade
 
 #from Transflower
  
-i am samruddhi 
-and do not delete my data
+ IACSD DAC students are the best
