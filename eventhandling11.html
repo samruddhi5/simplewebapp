@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <script>
+        function f1() {
+            console.log("onload event occur");
+        }
+
+        function f2(ev) {
+            console.log(ev.target.id);
+            console.log("onfocus event occur");
+
+        }
+
+        function f3() {
+            var b = document.getElementById("btn");
+            b.addEventListener("click", f5); //assigning the event programatticlly
+            console.log("onblur event occur");
+        }
+
+        function f4() {
+            console.log("onchange event occur");
+        }
+
+        function f5() {
+            console.log("in buttons click event");
+        }
+
+        function showval(ev) {
+            document.getElementById("myp").innerHTML = ev.target.value;
+        }
+    </script>
+</head>
+
+
+<body onload="f1()">
+    <p id="myp"></p>
+    <button id="btn1" value="1" onclick="showval(event)">1</button>
+    <button id="btn2" value="2" onclick=showval(event)>2</button>
+    <button id="btn3" value="3" onclick=showval(event)>3</button>
+    <button id="btn4" value="4" onclick=showval(event)>4</button>
+    <input type="text" name="nm" id="nm" onfocus="f2(event)" onblur="f3()" onchange="f4()">
+    <input type="text" name="age" id="age" onfocus="f2(event)" onblur="f3()" onchange="f4()">
+    <input type="text" name="mobile" id="mobile" onfocus="f2(event)" onblur="f3()" onchange="f4()">
+    <button type="button" name="btn" id="btn">click me</button>
+</body>
+
+</html>
